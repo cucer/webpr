@@ -1,9 +1,49 @@
-.vscode
-.vscode/**
-.vscode-test/**
-.gitignore
+# Ignore source files
+src/**
+**/*.ts
+
+# Ignore test files
+test/**
+*.test.*
+*.spec.*
+
+# Ignore git and editor configs
 git
 .git
+.vscode
+.gitignore
+.vscode/**
+.vscode-test/**
+.eslintrc*
+.prettierrc*
+*.code-workspace
+
+# Ignore Node build artifacts
+node_modules/**
+
+# Ignore package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore system files
 README.md
 .DS_Store
 __MACOSX
+Thumbs.db
+
+# Ignore build tools and configurations
+tsconfig.json
+webpack.config.js
+rollup.config.js
+gulpfile.js
+
+# Ignore markdown docs (optional)
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Allow registration of assets
+!assets/**
+
+# Keep built code
+!out/**

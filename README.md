@@ -8,6 +8,15 @@ Convert classic image formats to WebP directly from Visual Studio Code with neon
 - Trigger the command from the palette and pick an image from your filesystem.
 - Automatically opens the newly generated `.webp` file once conversion finishes.
 
+## Use in VS Code
+
+1. Open your project folder in VS Code.
+2. In the Explorer, right-click the image you want to convert and select **Convert Image to WebP 🌴**.
+3. Alternatively, open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`), search for `Convert Image to WebP`, and pick an image from the quick pick list.
+4. The converted `.webp` file appears alongside the source image and opens in a new editor tab.
+
+![Context menu showing Convert Image to WebP command](assets/example.png)
+
 ## 📦 Installation
 
 1. Download the `.vsix` file (if available), or

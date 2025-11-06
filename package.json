@@ -1,0 +1,74 @@
+{
+  "name": "webpr",
+  "displayName": "Retro WebP Converter",
+  "description": "Convert PNG/JPG into WebP with a cool Miami Vice-style interface 🚀🌴",
+  "version": "1.0.0",
+  "publisher": "cucer",
+  "license": "MIT",
+  "author": {
+    "name": "Cagatay Ucer",
+    "url": "https://cagatayucer.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cucer/webpr"
+  },
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "webp",
+    "png",
+    "jpg",
+    "jpeg",
+    "bmp",
+    "tiff",
+    "convert"
+  ],
+  "homepage": "https://github.com/cucer/webpr",
+  "bugs": {
+    "url": "https://github.com/cucer/webpr/issues"
+  },
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "webpr.convertToWebp",
+        "title": "Convert Image to WebP 🌴",
+        "icon": {
+          "light": "assets/icon.png",
+          "dark": "assets/icon.png"
+        }
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "webpr.convertToWebp",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg|bmp)$/i",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "vscode": "^1.85.0",
+    "@types/node": "^20.11.11",
+    "typescript": "^5.3.3",
+    "@vscode/vsce": "^3.6.0"
+  }
+}

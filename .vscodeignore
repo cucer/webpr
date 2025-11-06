@@ -1,0 +1,9 @@
+.vscode
+.vscode/**
+.vscode-test/**
+.gitignore
+git
+.git
+README.md
+.DS_Store
+__MACOSX

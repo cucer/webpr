@@ -17,11 +17,6 @@ Convert classic image formats to WebP directly from Visual Studio Code with neon
 ext install cucer.webpr
 ```
 
-## Usage
-
-- `Linux` & `Windows` > **File > Preferences > File Icon Theme > Turkish Icons**.
-- `MacOS` > **Code > Preferences > File Icon Theme > Turkish Icons**.
-
 ## Requirements
 
 - Visual Studio Code `^1.85.0`

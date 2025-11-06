@@ -34,6 +34,9 @@
     "url": "https://github.com/cucer/webpr/issues"
   },
   "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:webpr.convertToWebp"
+  ],
   "contributes": {
     "commands": [
       {

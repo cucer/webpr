@@ -1,115 +1,85 @@
-'use strict';
-var __createBinding =
-  (this && this.__createBinding) ||
-  (Object.create
-    ? function (o, m, k, k2) {
-        if (k2 === undefined) k2 = k;
-        var desc = Object.getOwnPropertyDescriptor(m, k);
-        if (
-          !desc ||
-          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
-        ) {
-          desc = {
-            enumerable: true,
-            get: function () {
-              return m[k];
-            },
-          };
-        }
-        Object.defineProperty(o, k2, desc);
-      }
-    : function (o, m, k, k2) {
-        if (k2 === undefined) k2 = k;
-        o[k2] = m[k];
-      });
-var __setModuleDefault =
-  (this && this.__setModuleDefault) ||
-  (Object.create
-    ? function (o, v) {
-        Object.defineProperty(o, 'default', { enumerable: true, value: v });
-      }
-    : function (o, v) {
-        o['default'] = v;
-      });
-var __importStar =
-  (this && this.__importStar) ||
-  (function () {
-    var ownKeys = function (o) {
-      ownKeys =
-        Object.getOwnPropertyNames ||
-        function (o) {
-          var ar = [];
-          for (var k in o)
-            if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-          return ar;
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
         };
-      return ownKeys(o);
+        return ownKeys(o);
     };
     return function (mod) {
-      if (mod && mod.__esModule) return mod;
-      var result = {};
-      if (mod != null)
-        for (var k = ownKeys(mod), i = 0; i < k.length; i++)
-          if (k[i] !== 'default') __createBinding(result, mod, k[i]);
-      __setModuleDefault(result, mod);
-      return result;
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
     };
-  })();
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
-Object.defineProperty(exports, '__esModule', { value: true });
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
 exports.deactivate = deactivate;
-const vscode = __importStar(require('vscode'));
-const sharp_1 = __importDefault(require('sharp'));
-const path = __importStar(require('path'));
+const path = __importStar(require("path"));
+const sharp_1 = __importDefault(require("sharp"));
+const vscode = __importStar(require("vscode"));
 function isSupportedImage(ext) {
-  return ['.png', '.jpg', '.jpeg', '.bmp', '.tiff'].includes(ext.toLowerCase());
+    return ['.png', '.jpg', '.jpeg', '.bmp', '.tiff'].includes(ext.toLowerCase());
 }
 async function promptForImage() {
-  const files = await vscode.window.showOpenDialog({
-    canSelectMany: false,
-    openLabel: 'Convert to WebP',
-    filters: {
-      Images: ['png', 'jpg', 'jpeg', 'bmp', 'tiff'],
-    },
-  });
-  return files?.[0];
+    const files = await vscode.window.showOpenDialog({
+        canSelectMany: false,
+        openLabel: 'Convert to WebP',
+        filters: {
+            Images: ['png', 'jpg', 'jpeg', 'bmp', 'tiff'],
+        },
+    });
+    return files?.[0];
 }
 function activate(context) {
-  const command = 'webpr.convertToWebp';
-  const disposable = vscode.commands.registerCommand(command, async (uri) => {
-    try {
-      const inputUri = uri ?? (await promptForImage());
-      if (!inputUri) {
-        vscode.window.showWarningMessage('No image selected.');
-        return;
-      }
-      const inputPath = inputUri.fsPath;
-      const ext = path.extname(inputPath);
-      if (!isSupportedImage(ext)) {
-        vscode.window.showErrorMessage(
-          'Unsupported file type. Please select a PNG, JPG, JPEG, BMP, or TIFF image.'
-        );
-        return;
-      }
-      const outputPath = inputPath.replace(ext, '.webp');
-      await (0, sharp_1.default)(inputPath)
-        .webp({ quality: 80 })
-        .toFile(outputPath);
-      vscode.window.showInformationMessage(
-        `🌴 Conversion successful! Saved as: ${outputPath}`
-      );
-      await vscode.window.showTextDocument(vscode.Uri.file(outputPath));
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      vscode.window.showErrorMessage(`💥 Error: ${message}`);
-    }
-  });
-  context.subscriptions.push(disposable);
+    const command = 'webpr.convertToWebp';
+    const disposable = vscode.commands.registerCommand(command, async (uri) => {
+        try {
+            const inputUri = uri ?? (await promptForImage());
+            if (!inputUri) {
+                vscode.window.showWarningMessage('No image selected.');
+                return;
+            }
+            const inputPath = inputUri.fsPath;
+            const ext = path.extname(inputPath);
+            if (!isSupportedImage(ext)) {
+                vscode.window.showErrorMessage('Unsupported file type. Please select a PNG, JPG, JPEG, BMP, or TIFF image.');
+                return;
+            }
+            const outputPath = inputPath.replace(ext, '.webp');
+            await (0, sharp_1.default)(inputPath).webp({ quality: 80 }).toFile(outputPath);
+            vscode.window.showInformationMessage(`🌴 Conversion successful! Saved as: ${outputPath}`);
+            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+        }
+        catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            vscode.window.showErrorMessage(`💥 Error: ${message}`);
+        }
+    });
+    context.subscriptions.push(disposable);
 }
-function deactivate() {}
+function deactivate() { }
 //# sourceMappingURL=extension.js.map

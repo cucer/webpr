@@ -5,11 +5,11 @@
     "outDir": "out",
     "rootDir": "src",
     "lib": ["ES2020"],
-    "types": ["node"],
-    "typeRoots": ["./types", "./node_modules/@types"],
+    "types": ["vscode"],
     "strict": true,
     "sourceMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true // ✅ Çakışan tip bildirim hatalarını tamamen engeller
   },
   "exclude": ["node_modules", ".vscode-test"]
 }

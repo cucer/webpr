@@ -1,49 +1,36 @@
-# Ignore source files
+# Ignore TypeScript source files
 src/**
 **/*.ts
 
-# Ignore test files
-test/**
-*.test.*
-*.spec.*
-
-# Ignore git and editor configs
-git
-.git
-.vscode
-.gitignore
+# Ignore configuration and build system files
 .vscode/**
-.vscode-test/**
-.eslintrc*
-.prettierrc*
 *.code-workspace
+tsconfig.json
+scripts/**
 
-# Ignore Node build artifacts
-node_modules/**
+# Ignore version control + metadata
+.gitignore
+.git/**
+npm-debug.log
+yarn-error.log
 
-# Ignore package manager files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Ignore system files
-README.md
+# Ignore system / noise files
 .DS_Store
-__MACOSX
 Thumbs.db
 
-# Ignore build tools and configurations
-tsconfig.json
-webpack.config.js
-rollup.config.js
-gulpfile.js
-
-# Ignore markdown docs (optional)
-CONTRIBUTING.md
+# Ignore documentation that is not needed in VSIX
 CHANGELOG.md
+CONTRIBUTING.md
 
-# Allow registration of assets
-!assets/**
+# Ignore node_modules by default...
+node_modules/**
 
-# Keep built code
+# ... BUT keep Sharp runtime binaries (very important)
+!node_modules/sharp/**
+!node_modules/@img/**
+!node_modules/detect-libc/**
+!node_modules/semver/**
+
+# Keep compiled extension
 !out/**
+!assets/**

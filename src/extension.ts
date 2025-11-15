@@ -1,5 +1,5 @@
 import * as path from 'path';
-import sharp from 'sharp';
+// import sharp from 'sharp';
 import * as vscode from 'vscode';
 
 function isSupportedImage(ext: string): boolean {
@@ -14,39 +14,44 @@ async function promptForImage(): Promise<vscode.Uri | undefined> {
       Images: ['png', 'jpg', 'jpeg', 'bmp', 'tiff'],
     },
   });
-
-  return files?.[0];
+  return files && files.length > 0 ? files[0] : undefined;
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  const command = 'webpr.convertToWebp';
-
   const disposable = vscode.commands.registerCommand(
-    command,
-    async (uri?: vscode.Uri) => {
+    'webpr.convertToWebp',
+    async (uri: vscode.Uri) => {
       try {
-        const inputUri = uri ?? (await promptForImage());
-        if (!inputUri) {
-          vscode.window.showWarningMessage('No image selected.');
-          return;
-        }
-
-        const inputPath = inputUri.fsPath;
-        const ext = path.extname(inputPath);
-
-        if (!isSupportedImage(ext)) {
+        // ✅ Lazy load sharp here instead of top-level import
+        let sharp: any;
+        try {
+          sharp = (await import('sharp')).default;
+        } catch (e) {
           vscode.window.showErrorMessage(
-            'Unsupported file type. Please select a PNG, JPG, JPEG, BMP, or TIFF image.'
+            'The Sharp library could not be loaded! This is usually caused by missing platform-specific files in the VSIX package. ' +
+              'Please make sure to include all required @img/sharp-* packages for every platform.'
           );
           return;
         }
 
-        const outputPath = inputPath.replace(ext, '.webp');
+        const fileUri = uri ?? (await promptForImage());
+        if (!fileUri) {
+          vscode.window.showWarningMessage('⚠️ No image selected.');
+          return;
+        }
 
+        const inputPath = fileUri.fsPath;
+        const ext = path.extname(inputPath);
+        if (!isSupportedImage(ext)) {
+          vscode.window.showErrorMessage('❌ Unsupported image format!');
+          return;
+        }
+
+        const outputPath = inputPath.replace(ext, '.webp');
         await sharp(inputPath).webp({ quality: 80 }).toFile(outputPath);
 
         vscode.window.showInformationMessage(
-          `🌴 Conversion successful! Saved as: ${outputPath}`
+          `✅ Converted to WebP: ${outputPath}`
         );
         await vscode.commands.executeCommand(
           'vscode.open',

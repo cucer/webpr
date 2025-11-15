@@ -40,6 +40,7 @@ No custom settings yet—conversion quality defaults to `80`. Future versions ma
 ```bash
 npm install
 npm run compile
+npm version patch
 npm run package
 ```
 

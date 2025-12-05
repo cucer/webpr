@@ -2,7 +2,7 @@
   "name": "webpr",
   "displayName": "Retro WebP Converter",
   "description": "Convert PNG/JPG into WebP with a cool Miami Vice-style interface.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "cucer",
   "license": "MIT",
   "author": {

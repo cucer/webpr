@@ -1,6 +1,10 @@
-# WEBPR - Retro WebP Converter
+# WEBPR - Retro WebP Converter <span style="color:#b30000;">(macOS Apple Silicon / arm64)</span>
 
 Convert classic image formats to WebP directly from Visual Studio Code with neon Miami vibes.
+
+<div style="background:#b30000;color:#ffffff;padding:12px 14px;border-radius:8px;font-weight:700;">
+🚧 Platform support: This build currently works only on macOS (Apple Silicon / arm64). Other operating systems will be supported soon.
+</div>
 
 ## Features
 
@@ -28,6 +32,7 @@ ext install cucer.webpr
 
 ## Requirements
 
+- macOS (Apple Silicon / arm64) only for this build. Other OS targets are planned soon.
 - Visual Studio Code `^1.85.0`
 - The extension bundles [`sharp`](https://sharp.pixelplumbing.com/) for lightning-fast conversion.
 
